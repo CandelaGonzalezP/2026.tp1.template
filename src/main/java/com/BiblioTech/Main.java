@@ -4,7 +4,6 @@ import com.BiblioTech.exception.BibliotecaException;
 import com.BiblioTech.model.*;
 import com.BiblioTech.repository.*;
 import com.BiblioTech.service.*;
-import com.BiblioTech.persistence.PersistenciaService;
 
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +14,6 @@ public class Main {
     private static LibroService libroService;
     private static SocioService socioService;
     private static PrestamoService prestamoService;
-    private static PersistenciaService persistencia;
 
     public static void main(String[] args) {
         LibroRepository libroRepo = new LibroRepositoryImpl();
@@ -25,9 +23,6 @@ public class Main {
         libroService = new LibroServiceImpl(libroRepo);
         socioService = new SocioServiceImpl(socioRepo);
         prestamoService = new PrestamoServiceImpl(libroRepo, socioRepo, prestamoRepo);
-        persistencia = new PersistenciaService(libroRepo, socioRepo);
-        persistencia.cargarLibros();
-        persistencia.cargarSocios();
 
         int opcion;
         do {
@@ -41,10 +36,6 @@ public class Main {
                 case 5 -> listarLibros();
                 case 6 -> listarSocios();
                 case 7 -> listarPrestamos();
-                case 8 -> {
-                    persistencia.guardarLibros();
-                    persistencia.guardarSocios();
-                }
                 case 0 -> System.out.println("¡Hasta luego!");
                 default -> System.out.println("Opción inválida.");
             }
@@ -60,7 +51,6 @@ public class Main {
         System.out.println("5. Listar libros");
         System.out.println("6. Listar socios");
         System.out.println("7. Listar préstamos");
-        System.out.println("8. Guardar datos");
         System.out.println("0. Salir");
         System.out.print("Opción: ");
     }
@@ -148,8 +138,7 @@ public class Main {
             return;
         }
         socios.forEach(s -> System.out.println(
-                s.getDni() + " | " + s.getNombre() + " | " + s.getTipo() +
-                        (s.estaSancionado() ? " | SANCIONADO hasta: " + s.getFechaFinSancion() : " | Habilitado")
+                s.getDni() + " | " + s.getNombre() + " | " + s.getTipo()
         ));
     }
 
