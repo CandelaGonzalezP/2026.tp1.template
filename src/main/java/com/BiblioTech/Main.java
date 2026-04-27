@@ -138,7 +138,8 @@ public class Main {
             return;
         }
         socios.forEach(s -> System.out.println(
-                s.getDni() + " | " + s.getNombre() + " | " + s.getTipo()
+                s.getDni() + " | " + s.getNombre() + " | " + s.getTipo() +
+                        (s.estaSancionado() ? " | SANCIONADO hasta: " + s.getFechaFinSancion() : " | Habilitado")
         ));
     }
 
