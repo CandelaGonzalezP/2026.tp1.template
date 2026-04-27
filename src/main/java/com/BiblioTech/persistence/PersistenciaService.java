@@ -3,14 +3,13 @@ package com.BiblioTech.persistence;
 import com.BiblioTech.model.*;
 import com.BiblioTech.repository.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PersistenciaService {
 
-    private static final String LIBROS_CSV = "libros.csv";
-    private static final String SOCIOS_CSV = "socios.csv";
+    private static final String LIBROS_CSV = "data/libros.csv";
+    private static final String SOCIOS_CSV = "data/socios.csv";
 
     private final LibroRepository libroRepository;
     private final SocioRepository socioRepository;
